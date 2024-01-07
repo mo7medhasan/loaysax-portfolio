@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 3000px;
+            background: black;
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        h1 {
+            z-index: 1;
+            position: relative;
+            text-align: center;
+            font-family: arial;
+            font-size: 16px;
+            color: #333333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>SCROLL DOWN</h1>
+    <video id="videoplayerhtml" class="f-video-player" preload poster muted data-pmcvt="true" >
+        <source src="../assets/loay.webm" type="video/webm">
+        <source src="" type="video/mp4">
+        <source src="" type="video/ogg">
+    </video>
+    <script>
+        let video = document.getElementById('videoplayerhtml');
+        let videoDuration = 0;
+
+        video.onloadedmetadata = function () {
+            videoDuration = video.duration;
+        };
+
+        window.addEventListener("scroll", function () {
+            let speed = 300;
+            let scroll = this.scrollY / speed; // Access scrollY for vertical scrolling
+            let currentTime = (scroll < videoDuration) ? scroll : videoDuration; // Limit currentTime to videoDuration
+            video.currentTime = currentTime;
+        });
+    </script>
+</body>
+
+</html>
