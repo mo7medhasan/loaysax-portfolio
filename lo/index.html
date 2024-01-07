@@ -13,7 +13,7 @@
         }
         @media screen and (max-width:"900px") {
             html,  body {
-            height: 1500px;
+            height: 500px;
         } 
         }
 
@@ -58,7 +58,7 @@
         };
 
         window.addEventListener("scroll", function () {
-            let speed = 350;
+            let speed = 115;
             let scroll = this.scrollY / speed; // Access scrollY for vertical scrolling
             let currentTime = (scroll < videoDuration) ? scroll : videoDuration; // Limit currentTime to videoDuration
             video.currentTime = currentTime;
