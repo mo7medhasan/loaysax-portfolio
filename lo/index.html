@@ -16,7 +16,7 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            width: 50%;
+            width: 90%;
             transform: translate(-50%, -50%);
         }
 
@@ -47,7 +47,7 @@
         };
 
         window.addEventListener("scroll", function () {
-            let speed = 300;
+            let speed = 100;
             let scroll = this.scrollY / speed; // Access scrollY for vertical scrolling
             let currentTime = (scroll < videoDuration) ? scroll : videoDuration; // Limit currentTime to videoDuration
             video.currentTime = currentTime;
