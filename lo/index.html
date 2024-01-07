@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        html,
-        body {
+        html, body {
             height: 3000px;
             background: black;
         }
-        @media screen and (max-width:"900px") {
-            html,  body {
-            height: 200vh;
-        } 
+
+        @media screen and (max-width: 900px) {
+            html, body {
+                height: 300vh;
+            }
         }
 
         video {
@@ -30,9 +30,7 @@
             position: fixed;
             top: 0;
             left: 50%;
-            
             transform: translate(-50%, 0);
-    
             text-align: center;
             font-family: arial;
             font-size: 2em;
@@ -42,27 +40,37 @@
 </head>
 
 <body>
-    <h1>ازيك يا حسن<br/>
-    انزل تحت</h1>
-    <video id="videoplayerhtml" class="f-video-player" preload poster muted data-pmcvt="true" >
+    <h1>ازيك يا حسن<br /> انزل تحت</h1>
+    <video id="videoplayerhtml" class="f-video-player" preload poster muted data-pmcvt="true" loop>
         <source src="../assets/loay.webm" type="video/webm">
         <source src="" type="video/mp4">
         <source src="" type="video/ogg">
     </video>
     <script>
-        let video = document.getElementById('videoplayerhtml');
+        const video = document.getElementById('videoplayerhtml');
         let videoDuration = 0;
+
+        let boolPlay = false;
+    
 
         video.onloadedmetadata = function () {
             videoDuration = video.duration;
         };
 
+
         window.addEventListener("scroll", function () {
-            let speed = 115;
-            let scroll = this.scrollY / speed; // Access scrollY for vertical scrolling
-            let currentTime = (scroll < videoDuration) ? scroll : videoDuration; // Limit currentTime to videoDuration
-            video.currentTime = currentTime;
-            console.log(currentTime,videoDuration,scroll);
+            let scroll = (this.scrollY == 0 ? 1 : (this.scrollY <= (this.innerHeight * 1.5) ? this.scrollY : this.innerHeight * 1.5)) / (this.innerHeight * 1.5);
+
+            let currentTime = videoDuration * scroll;
+            boolPlay = this.scrollY > (this.innerHeight * 1.5)?true:false;
+
+            if (!boolPlay) {
+               
+                video.currentTime = currentTime;
+                video.pause()
+            } else {
+                video.play();
+            }
         });
     </script>
 </body>
